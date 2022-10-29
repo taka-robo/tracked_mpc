@@ -15,21 +15,6 @@
 #include <boost/range/size.hpp>
 #include <boost/range/value_type.hpp>
 
-#include <Eigen/Core>
-
-template <class FrameRange>
-static inline bool waitFrames(tf2_ros::Buffer* const buffer, const FrameRange& frames, const ros::Duration& rel_timeout)
-{
-  const ros::Time abs_timeout = ros::Time::now() + rel_timeout;
-  for (const std::string& child : frames)
-  {
-    if (!buffer->canTransform(*boost::begin(frames), child, ros::Time(0), abs_timeout - ros::Time::now()))
-    {
-      return false;
-    }
-  }
-  return true;
-}
 
 static inline geometry_msgs::Pose lookupPose2d(tf2_ros::Buffer* const buffer, const std::string& parent_frame,
                                              const std::string& child_frame, const ros::Time& target_time)
