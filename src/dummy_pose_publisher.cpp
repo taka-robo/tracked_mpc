@@ -28,11 +28,10 @@ public:
 };
 void twistDataCallback(const geometry_msgs::Twist::ConstPtr twist){
 	const ros::Time target_time = ros::Time::now();
-	const double x =  
-	const double y =
-	const double z = 
-	const geometry_msgs::TransformStamped tf = makeTransform(target_time,g_parent_frame,g_child_frame,x,y,z);
-	
+	const double x = twist->linear.x;
+	const double y = twist->linear.y;
+	const double z = twist->linear.z;
+	const geometry_msgs::TransformStamped tf = makeTransform(target_time,g_parent_frame,g_child_frame,x,y,z);	
 }
 
 int main(int argc,char* argv[])
