@@ -42,7 +42,7 @@ void pathDataCallback(const nav_msgs::Path::ConstPtr path){
 
 int main(int argc,char* argv[])
 {
-	ros::init(argc, argv, "nut_navigation_node");
+	ros::init(argc, argv, "tracked_mpc_node");
   ros::NodeHandle nh;
 	//Param
 	const ros::Rate control_rate(ros::param::param("~control_rate", 1.));
