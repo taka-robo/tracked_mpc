@@ -1,4 +1,4 @@
-/* Produced by CVXGEN, 2022-12-07 05:09:50 -0500.  */
+/* Produced by CVXGEN, 2022-12-07 11:01:32 -0500.  */
 /* CVXGEN is Copyright (C) 2006-2017 Jacob Mattingley, jem@cvxgen.com. */
 /* The code in this file is Copyright (C) 2006-2017 Jacob Mattingley. */
 /* CVXGEN, or solvers produced by CVXGEN, cannot be used for commercial */
@@ -28,68 +28,121 @@
 #define pm(A, m, n) printmatrix(#A, A, m, n, 1)
 #endif
 typedef struct Params_t {
-  double x_0[3];
-  double Q[9];
+  double x_ref_1[2];
+  double Q[4];
+  double u_ref_1[2];
   double R[4];
-  double Q_final[9];
-  double A[9];
-  double B[6];
+  double x_ref_2[2];
+  double u_ref_2[2];
+  double x_ref_3[2];
+  double u_ref_3[2];
+  double x_ref_4[2];
+  double u_ref_4[2];
+  double x_ref_5[2];
+  double u_ref_5[2];
+  double x_ref_6[2];
+  double u_ref_6[2];
+  double x_ref_7[2];
+  double u_ref_7[2];
+  double x_ref_8[2];
+  double u_ref_8[2];
+  double x_ref_9[2];
+  double u_ref_9[2];
+  double x_ref_10[2];
+  double u_ref_10[2];
+  double A[4];
+  double x_0[2];
+  double B[4];
+  double u_0[2];
+  double w_0[2];
+  double w_1[2];
+  double w_2[2];
+  double w_3[2];
+  double w_4[2];
+  double w_5[2];
+  double w_6[2];
+  double w_7[2];
+  double w_8[2];
+  double w_9[2];
+  double w_10[2];
   double u_max[2];
+  double *x_ref[11];
+  double *u_ref[11];
   double *x[1];
+  double *u[1];
+  double *w[11];
 } Params;
 typedef struct Vars_t {
-  double *u_0; /* 2 rows. */
-  double *x_1; /* 3 rows. */
+  double *x_1; /* 2 rows. */
   double *u_1; /* 2 rows. */
-  double *x_2; /* 3 rows. */
+  double *x_2; /* 2 rows. */
   double *u_2; /* 2 rows. */
-  double *x_3; /* 3 rows. */
+  double *x_3; /* 2 rows. */
   double *u_3; /* 2 rows. */
-  double *x_4; /* 3 rows. */
+  double *x_4; /* 2 rows. */
   double *u_4; /* 2 rows. */
-  double *x_5; /* 3 rows. */
+  double *x_5; /* 2 rows. */
   double *u_5; /* 2 rows. */
-  double *x_6; /* 3 rows. */
+  double *x_6; /* 2 rows. */
   double *u_6; /* 2 rows. */
-  double *x_7; /* 3 rows. */
+  double *x_7; /* 2 rows. */
   double *u_7; /* 2 rows. */
-  double *x_8; /* 3 rows. */
+  double *x_8; /* 2 rows. */
   double *u_8; /* 2 rows. */
-  double *x_9; /* 3 rows. */
+  double *x_9; /* 2 rows. */
   double *u_9; /* 2 rows. */
-  double *x_10; /* 3 rows. */
+  double *x_10; /* 2 rows. */
   double *u_10; /* 2 rows. */
-  double *x_11; /* 3 rows. */
-  double *u[11];
+  double *x_11; /* 2 rows. */
   double *x[12];
+  double *u[11];
 } Vars;
 typedef struct Workspace_t {
-  double h[22];
-  double s_inv[22];
-  double s_inv_z[22];
-  double b[33];
-  double q[55];
-  double rhs[132];
-  double x[132];
+  double h[20];
+  double s_inv[20];
+  double s_inv_z[20];
+  double b[22];
+  double q[42];
+  double rhs[104];
+  double x[104];
   double *s;
   double *z;
   double *y;
-  double lhs_aff[132];
-  double lhs_cc[132];
-  double buffer[132];
-  double buffer2[132];
-  double KKT[376];
-  double L[343];
-  double d[132];
-  double v[132];
-  double d_inv[132];
+  double lhs_aff[104];
+  double lhs_cc[104];
+  double buffer[104];
+  double buffer2[104];
+  double KKT[242];
+  double L[181];
+  double d[104];
+  double v[104];
+  double d_inv[104];
   double gap;
   double optval;
   double ineq_resid_squared;
   double eq_resid_squared;
   double block_33[1];
   /* Pre-op symbols. */
-  double quad_645199597568[1];
+  double quad_17600004096[1];
+  double quad_75041198080[1];
+  double quad_825882382336[1];
+  double quad_310744465408[1];
+  double quad_43289251840[1];
+  double quad_867551223808[1];
+  double quad_936874864640[1];
+  double quad_25166749696[1];
+  double quad_749185671168[1];
+  double quad_311627829248[1];
+  double quad_751015542784[1];
+  double quad_265195487232[1];
+  double quad_28412862464[1];
+  double quad_209769947136[1];
+  double quad_599520112640[1];
+  double quad_9785421824[1];
+  double quad_612073590784[1];
+  double quad_452768845824[1];
+  double quad_324497137664[1];
+  double quad_205472698368[1];
   int converged;
 } Workspace;
 typedef struct Settings_t {

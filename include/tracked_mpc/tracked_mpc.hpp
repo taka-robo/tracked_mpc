@@ -14,13 +14,30 @@
 namespace tracked_mpc {
 class TrackedMPC {
 public:
-  TrackedMPC() {}
+  TrackedMPC(const double v, const double dt) : v_(v), dt_(dt) {
+    params.A[0] = 1;
+    params.A[1] = v_ * dt_;
+    params.A[2] = 0;
+    params.A[3] = 1;
+    params.B[0] = 0;
+    params.B[1] = 1;
+  }
   ~TrackedMPC() {}
   void calcU(const nav_msgs::Path path, const geometry_msgs::Pose current_pose,
              const geometry_msgs::Twist current_twist, const int target_index, const double dt) {
+    const int path_size = path.poses.size();
     setInitState(current_pose, current_twist);
     // N点先までの目標軌道の設定
     for (int i = 0; i < N_; ++i) {
+      if (target_index + i < path_size) {
+        params.x_ref[i][0] = path.poses[target_index + i].pose.position.x;
+        params.x_ref[i][1] = path.poses[target_index + i].pose.position.y;
+        params.x_ref[i][2] = path.poses[target_index + i].pose.orientation.w;
+      } else {
+        params.x_ref[i][0] = path.poses[path_size - 1].pose.position.x;
+        params.x_ref[i][1] = path.poses[path_size - 1].pose.position.y;
+        params.x_ref[i][2] = path.poses[path_size - 1].pose.orientation.w;
+      }
     }
     solve();
     twist_.linear.x = vars.u[1][0];
@@ -37,6 +54,7 @@ public:
 
 private:
   int N_;
+  double dt_, v_;
   Vars vars;
   Params params;
   Workspace work;
