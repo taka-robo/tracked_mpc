@@ -20,4 +20,5 @@
 		<param name="parent_frame" value="world" />
 		<param name="child_frame" value="master" />
 	</node>
+	<node pkg="rviz" name="rviz" type="rviz" args="-d $(find tracked_mpc)/launch/demo.rviz" output="screen"/>
 </launch>

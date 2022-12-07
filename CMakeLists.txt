@@ -126,6 +126,12 @@ include_directories(
 # add_library(tracked_mpc_node
 #   src/tracked_mpc_node.cpp
 # )
+add_library(cvxgen 
+  include/tracked_mpc/cvxgen/solver.c
+  include/tracked_mpc/cvxgen/ldl.c
+  include/tracked_mpc/cvxgen/util.c
+  include/tracked_mpc/cvxgen/matrix_support.c
+)
 add_executable(
   tracked_mpc_node 
   src/tracked_mpc_node.cpp
@@ -167,7 +173,9 @@ add_dependencies(
 target_link_libraries(
   tracked_mpc_node
   ${catkin_LIBRARIES}
+  cvxgen
 )
+
 target_link_libraries(
   dummy_bot_node
   ${catkin_LIBRARIES}
