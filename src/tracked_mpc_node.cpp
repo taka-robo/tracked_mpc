@@ -20,38 +20,40 @@ ros::Publisher g_cmd_vel_pub;
 nav_msgs::Path g_path;
 tf2_ros::Buffer tf_buf;
 
-
-int getNearestPoseIndex(const nav_msgs::Path& path,const geometry_msgs::Pose current_pose){
+int getNearestPoseIndex(const nav_msgs::Path& path, const geometry_msgs::Pose current_pose)
+{
 	int index_id;
-	ROS_ASSERT(path.poses.size()>0);
-	//search nearest pose index
+	ROS_ASSERT(path.poses.size() > 0);
+	// search nearest pose index
 	return index_id;
 }
 // Timer call back function for MPC controller
-void timerCallback(const ros::TimerEvent event){
-	ROS_ASSERT(g_path.poses.size()>0);	
+void timerCallback(const ros::TimerEvent event)
+{
+	ROS_ASSERT(g_path.poses.size() > 0);
 	const ros::Time target_time = event.current_expected.now();
-	const geometry_msgs::Pose current_pose = lookupPose2d(&tf_buf,"map","body_link",target_time);
-	getNearestPoseIndex(g_path,current_pose);
+	const geometry_msgs::Pose current_pose = lookupPose2d(&tf_buf, "map", "body_link", target_time);
+	getNearestPoseIndex(g_path, current_pose);
 }
 // Update tracking path
-void pathDataCallback(const nav_msgs::Path::ConstPtr path){	
+void pathDataCallback(const nav_msgs::Path::ConstPtr path)
+{
 	g_path.header = path->header;
 	g_path.poses = path->poses;
 }
 
-int main(int argc,char* argv[])
+int main(int argc, char* argv[])
 {
 	ros::init(argc, argv, "tracked_mpc_node");
-  ros::NodeHandle nh;
-	//Param
+	ros::NodeHandle nh;
+	// Param
 	const ros::Rate control_rate(ros::param::param("~control_rate", 1.));
-	//Publisher
+	// Publisher
 	g_cmd_vel_pub = nh.advertise<geometry_msgs::Twist>("cmd_vel", 1, true);
-	//Subscriber
-	ros::Subscriber sub_path = nh.subscribe("path",1000,pathDataCallback);
+	// Subscriber
+	ros::Subscriber sub_path = nh.subscribe("path", 1000, pathDataCallback);
 	tf2_ros::TransformListener tf_sub(tf_buf, nh);
-	//Timer
+	// Timer
 	ros::Timer timer = nh.createTimer(control_rate.expectedCycleTime(), timerCallback);
 
 	ros::spin();

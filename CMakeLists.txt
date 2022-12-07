@@ -131,8 +131,8 @@ add_executable(
   src/tracked_mpc_node.cpp
 )
 add_executable(
-  dummy_pose_publisher
-  src/dummy_pose_publisher.cpp
+  dummy_bot_node
+  src/dummy_bot_node.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -144,7 +144,7 @@ add_dependencies(
   ${catkin_EXPORTED_TARGETS}
 )
 add_dependencies(
-  dummy_pose_publisher
+  dummy_bot_node
   ${${PROJECT_NAME}_EXPORTED_TARGETS} 
   ${catkin_EXPORTED_TARGETS}
 )
@@ -169,7 +169,7 @@ target_link_libraries(
   ${catkin_LIBRARIES}
 )
 target_link_libraries(
-  dummy_pose_publisher
+  dummy_bot_node
   ${catkin_LIBRARIES}
 )
 
